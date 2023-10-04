@@ -106,6 +106,10 @@ app.put('/update/:id', async (req, res) => {
     }
 });
 
+app.delete('/deletereq/:id',async(req,res)=>{
+    let result= await Reqq.deleteOne({_id:req.params.id});
+    res.send(result);
+})
 
 app.listen(4000, () => {
     console.log("listening on http://localhost:4000");
