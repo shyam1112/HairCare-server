@@ -101,7 +101,6 @@ app.put('/update/:id', async (req, res) => {
         );
         res.send(result);
     } catch (error) {
-        // Handle any potential errors here
         res.status(500).send(error);
     }
 });
