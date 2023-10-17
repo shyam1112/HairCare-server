@@ -29,6 +29,26 @@ app.post("/shoplogin", async (req, res) => {
     }
 });
 
+app.put('/updatedata/:id',async(req,res)=>{
+    const result = await ShopData.updateOne(
+        {_id:req.params.id},
+        {
+            $set:req.body
+        }
+    )
+    res.send(result);
+})
+
+app.get('/getshopdatabyid',async(req,res)=>{
+    const result=await ShopData.findOne({_id:req.params.id});
+    if(result){
+        res.send(result);
+    }else{
+        res.send({result:"No data found."});
+    }
+})
+
+
 app.post('/addshopdata', async (req, res) => {
     let shopdata = new ShopData(req.body);
     let result = await shopdata.save();
