@@ -30,13 +30,17 @@ app.post("/shoplogin", async (req, res) => {
 });
 
 app.put('/updatedata/:id',async(req,res)=>{
+    try {
     const result = await ShopData.updateOne(
-        {_id:req.params.id},
+        {userId:req.params.id},
         {
             $set:req.body
         }
-    )
-    res.send(result);
+        );
+        res.send(result);
+        } catch (error) {
+            res.status(500).send(error);
+        }
 })
 
 app.get('/getshopdatabyid/:userid',async(req,res)=>{
