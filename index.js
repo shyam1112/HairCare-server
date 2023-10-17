@@ -29,10 +29,10 @@ app.post("/shoplogin", async (req, res) => {
     }
 });
 
-app.put('/updatedata/:id',async(req,res)=>{
+app.put('/updatedata/:userId',async(req,res)=>{
     try {
     const result = await ShopData.updateOne(
-        {userId:req.params.id},
+        {userId:req.params.userId},
         {
             $set:req.body
         }
