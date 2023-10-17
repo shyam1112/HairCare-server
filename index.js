@@ -39,7 +39,7 @@ app.put('/updatedata/:id',async(req,res)=>{
     res.send(result);
 })
 
-app.get('/getshopdatabyid',async(req,res)=>{
+app.get('/getshopdatabyid/:id',async(req,res)=>{
     const result=await ShopData.findOne({_id:req.params.id});
     if(result){
         res.send(result);
