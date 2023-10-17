@@ -40,7 +40,7 @@ app.put('/updatedata/:id',async(req,res)=>{
 })
 
 app.get('/getshopdatabyid/:userid',async(req,res)=>{
-    let result=await Myorder.find({
+    let result=await ShopData.find({
         "$or":[
            {userId:{$regex:req.params.userid}}
         ]
