@@ -39,8 +39,12 @@ app.put('/updatedata/:id',async(req,res)=>{
     res.send(result);
 })
 
-app.get('/getshopdatabyid/:id',async(req,res)=>{
-    const result=await ShopData.findOne({_id:req.params.id});
+app.get('/getshopdatabyid/:userid',async(req,res)=>{
+    let result=await Myorder.find({
+        "$or":[
+           {userId:{$regex:req.params.userid}}
+        ]
+   })
     if(result){
         res.send(result);
     }else{
