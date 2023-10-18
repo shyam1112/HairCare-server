@@ -68,6 +68,17 @@ app.get('/getshopdata', async (req, res) => {
     res.send(result);
 })
 
+app.get('/shopdatabyid/:id',async(req,res)=>{
+    let result=await ShopData.findOne({
+        _id:req.params.id
+    })
+    if (result) {
+        res.send(result);
+    } else {
+        res.status(404).json({ result: "No data found." });
+    }
+})
+
 app.get('/profile/:id', async (req, res) => {
     let result = await ShopData.find({
         "$or": [
