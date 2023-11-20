@@ -5,10 +5,14 @@ const User = require('./user');
 const ShopData = require('./shopdata');
 const Reqq = require('./Requestt');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+app.use(bodyParser.json());
 
 app.post('/shopreg', async (req, res) => {
     let user = new User(req.body);
@@ -148,6 +152,36 @@ app.delete('/deletereq/:id',async(req,res)=>{
     let result= await Reqq.deleteOne({_id:req.params.id});
     res.send(result);
 })
+
+
+
+app.post('/send-email', (req, res) => {
+    const { to, subject, text } = req.body;
+  
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'shyamsardhara1112@gmail.com',
+        pass: 'Xcjiol@2269c',
+      },
+    });
+  
+    const mailOptions = {
+      from: 'shyamsardhara1112@gmail.com',
+      to,
+      subject,
+      text,
+    };
+  
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return res.status(500).send(error.toString());
+      }
+      res.status(200).send('Email sent: ' + info.response);
+    });
+  });
+  
+
 
 app.listen(4000, () => {
     console.log("listening on http://localhost:4000");
