@@ -152,7 +152,7 @@ app.put('/updatepass/:email',async(req,res)=>{
     const result = await User.updateOne(
         {email:req.params.email},
         {
-            $set:req.body
+            $set: { pass: req.body.pass }
         }
         );
         res.send(result);
