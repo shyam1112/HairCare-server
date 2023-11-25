@@ -161,6 +161,23 @@ app.put('/updatepass/:email',async(req,res)=>{
         }
 })
 
+app.post('/checkEmail', async (req, res) => {
+    const { email } = req.body;
+  
+    try {
+      const existingUser = await User.findOne({ email });
+  
+      if (existingUser) {
+        return res.json({ exists: true });
+      } else {
+        return res.json({ exists: false });
+      }
+    } catch (error) {
+      console.error('Error checking email:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
 app.delete('/deletereq/:id',async(req,res)=>{
     let result= await Reqq.deleteOne({_id:req.params.id});
     res.send(result);
